@@ -1,5 +1,6 @@
 from cryptography import Fernet
-from fastapi import APIRouter
+from fastapi import APIRouter, Response
+from starlette.status import HTTP_204_NO_CONTENT
 
 from config.database import connection as conn
 from models import User as model
@@ -17,7 +18,7 @@ def get_user(id: int):
     result = (conn.execute(
         model
         .select()
-        .where(model.User.id == id)
+        .where(model.c.id == id)
     ).first())
 
     return result
@@ -46,3 +47,20 @@ def create_user(user: User):
     ).first())
 
     return user_created
+
+
+@router.delete('/user/{id}')
+def delete_user(id):
+    """
+    It deletes a user from the database
+
+    :param id: The id of the user to delete
+    :return: The first row of the result set.
+    """
+    (conn.execute(
+        model
+        .delete()
+        .where(model.c.id == id)
+    ))
+
+    return Response(status_code=HTTP_204_NO_CONTENT)
