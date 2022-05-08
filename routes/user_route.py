@@ -11,11 +11,24 @@ __func = Fernet(__key)
 
 router = APIRouter()
 
+
+@router.get('/user/{id}')
+def get_user(id: int):
+    result = (conn.execute(
+        model
+        .select()
+        .where(model.User.id == id)
+    ).first())
+
+    return result
+
+
 @router.get('/users')
 def get_users():
     result = (conn.execute(model.select)
               .fetchall())
     return result
+
 
 @router.post('/user')
 def create_user(user: User):
