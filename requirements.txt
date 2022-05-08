@@ -4,3 +4,4 @@ SQLAlchemy==1.4.36
 Pydantic==1.9.0
 PyMySQL==1.0.2
 python-dotenv==0.20.0
+cryptography==37.0.2
