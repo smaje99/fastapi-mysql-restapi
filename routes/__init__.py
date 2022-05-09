@@ -1,1 +1,1 @@
-from .user_route import route as user_route
+from .user_route import router as user_route
