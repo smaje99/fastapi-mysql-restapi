@@ -1,4 +1,4 @@
-from cryptography import Fernet
+from cryptography.fernet import Fernet
 from fastapi import APIRouter, Response, status
 from starlette.status import HTTP_204_NO_CONTENT
 
